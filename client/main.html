@@ -1,0 +1,41 @@
+<head>
+  <title>Template-Level Subscriptions</title>
+</head>
+
+<body>
+  <div class="posts">
+    {{> posts}}
+  </div>
+</body>
+
+<template name="posts">
+  {{#with posts}}
+    {{#each cursor}}
+      <div class="post">
+        <h3>{{title}}</h3>
+        <p>{{body}}</p>
+        {{> comments postId=_id}}
+      </div>
+    {{/each}}
+    {{#if isReady}}
+      <a class="load-more" href="#">Load More</a>
+    {{else}}
+      <div class="loading">{{>spinner}}</div>
+    {{/if}}
+  {{/with}}
+</template>
+
+<template name="comments">
+  <ul>
+    {{#with comments}}
+      {{#each cursor}}
+        <li><strong>{{_id}}</strong> {{body}}</li>
+      {{/each}}
+      {{#if isReady}}
+        <a class="load-more" href="#">Load More</a>
+      {{else}}
+        <div class="loading">{{>spinner}}</div>
+      {{/if}}
+    {{/with}}
+  </ul>  
+</template>
