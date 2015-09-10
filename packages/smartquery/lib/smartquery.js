@@ -14,9 +14,7 @@ if (Meteor.isClient) {
   
   Smartquery.find = function (id, cursor) {
 
-    // var collection = this;
-
-    console.log(id)
+    // console.log(id)
 
     var sub;
     var collection = Mongo.Collection.get(cursor.collection.name);
@@ -30,26 +28,24 @@ if (Meteor.isClient) {
     if (cursor.sorter !== null)               { options.sort = cursor.sorter; }
 
     if (!!Smartquery.subscriptions[id]) {
-      sub = Smartquery.subscriptions[id];
-    } else {
-      sub = Meteor.subscribe(Smartquery.getPublicationName(collection), selector, options);
-      // var subFunction = function () {
-      //   return Meteor.subscribe(Smartquery.getPublicationName(collection), selector, options, function () {
-      //     console.log(id+' stopped')
-      //   }, function () {
-      //     console.log(id+' ready')
-      //   });
-      // };
-      // sub = Tracker.nonreactive(subFunction);
-      Smartquery.subscriptions[id] = sub;
+      Smartquery.subscriptions[id].stop();
     }
+    sub = Meteor.subscribe(Smartquery.getPublicationName(collection), id, selector, options);
+    Smartquery.subscriptions[id] = sub;
+
 
     // if (!!Smartquery.subscriptions[id]) {
-    //   console.log(1)
-    //   var sub = Smartquery.subscriptions[id];
+    //   sub = Smartquery.subscriptions[id];
     // } else {
-    //   console.log(2)
-    //   var sub = Meteor.subscribe(Smartquery.getPublicationName(collection), selector, options);
+    //   sub = Meteor.subscribe(Smartquery.getPublicationName(collection), selector, options);
+    //   // var subFunction = function () {
+    //   //   return Meteor.subscribe(Smartquery.getPublicationName(collection), selector, options, function () {
+    //   //     console.log(id+' stopped')
+    //   //   }, function () {
+    //   //     console.log(id+' ready')
+    //   //   });
+    //   // };
+    //   // sub = Tracker.nonreactive(subFunction);
     //   Smartquery.subscriptions[id] = sub;
     // }
 
@@ -60,6 +56,8 @@ if (Meteor.isClient) {
       ready: function () {
         return sub.ready()
       },
+      count: cursor.count(),
+      totalCount: Counts.get(id),
       cursor: cursor
     };
   }

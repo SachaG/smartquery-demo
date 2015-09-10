@@ -12,13 +12,13 @@
   {{#with posts}}
     {{#each cursor}}
       <div class="post">
-        <h3>{{title}}</h3>
+        <h3>{{title}} - {{_id}}</h3>
         <p>{{body}}</p>
-        {{> comments postId=_id}}
+        {{> comments postId=_id postTitle=title}}
       </div>
     {{/each}}
     {{#if isReady}}
-      <a class="load-more" href="#">Load More</a>
+      <a class="load-more load-more-posts" href="#">Load More Posts</a>
     {{else}}
       <div class="loading">{{>spinner}}</div>
     {{/if}}
@@ -26,16 +26,17 @@
 </template>
 
 <template name="comments">
-  <ul>
-    {{#with comments}}
+  {{#with comments}}
+    <h4>Showing {{count}}/{{totalCount}} comments </h4>
+    <ul>
       {{#each cursor}}
         <li><strong>{{_id}}</strong> {{body}}</li>
       {{/each}}
       {{#if isReady}}
-        <a class="load-more" href="#">Load More</a>
+        <a class="load-more load-more-comments" href="#">Load More Comments</a>
       {{else}}
         <div class="loading">{{>spinner}}</div>
       {{/if}}
-    {{/with}}
-  </ul>  
+    </ul>  
+  {{/with}}
 </template>

@@ -10,7 +10,8 @@ Package.onUse(function(api) {
   
   api.use([
     'standard-app-packages',
-    'dburles:mongo-collection-instances@0.3.4'
+    'dburles:mongo-collection-instances@0.3.4',
+    'tmeasday:publish-counts@0.7.1'
   ]);
 
   api.addFiles([

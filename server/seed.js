@@ -7,7 +7,7 @@ Meteor.startup(function () {
   for (i = 1; i <= 30; i++) {
     var published = !!(i%2);
     Posts.insert({
-      title: Fake.sentence(6),
+      title: Fake.sentence(3),
       body: Fake.paragraph(3),
       published: published
     });
@@ -22,13 +22,3 @@ Meteor.startup(function () {
     });
   }
 });
-
-// publish posts
-// Meteor.publish('posts', function(limit) {
-//   Meteor._sleepForMs(2000);
-//   return Posts.find({}, {limit: limit});
-// });
-
-// Smartquery.addRule(function (document, userId) {
-//   return document.published === true;
-// });

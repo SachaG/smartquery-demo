@@ -1,7 +1,11 @@
+var postsLimit = 1;
+var commentsLimit = 2;
+var commentsLimits = {};
+
 // Posts
 
 Template.posts.created = function () {
-  this.limit = new ReactiveVar(5);
+  this.limit = new ReactiveVar(postsLimit);
 };
 
 Template.posts.helpers({
@@ -17,20 +21,21 @@ Template.posts.helpers({
 });
 
 Template.posts.events({
-  'click .load-more': function (event, instance) {
+  'click .load-more-posts': function (event, instance) {
     event.preventDefault();
     var limit = instance.limit.get();
-    limit += 5;
+    limit += postsLimit;
     instance.limit.set(limit);
   }
 });
 
 // Comments
 
-Template.comments.created = function () {
-  this.limit = new ReactiveVar(3);
-};
-
+Template.comments.onCreated(function () {
+  // initialize limit to default value, or value stored in commentsLimits global array
+  var limit = !!commentsLimits[this.data.postId] ? commentsLimits[this.data.postId] : commentsLimit;
+  this.limit = new ReactiveVar(limit);
+});
 
 Template.comments.helpers({
   comments: function () {
@@ -44,10 +49,15 @@ Template.comments.helpers({
 });
 
 Template.comments.events({
-  'click .load-more': function (event, instance) {
+  'click .load-more-comments': function (event, instance) {
     event.preventDefault();
     var limit = instance.limit.get();
-    limit += 3;
+    limit += commentsLimit;
     instance.limit.set(limit);
   }
+});
+
+Template.comments.onDestroyed(function () {
+  // save comments limit for this thread in global array
+  commentsLimits[this.data.postId] = this.limit.get();
 });
