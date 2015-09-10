@@ -6,6 +6,8 @@
 
 meteor-platform
 reactive-var
+accounts-password
+accounts-ui
 anti:fake
 sacha:spin
 
