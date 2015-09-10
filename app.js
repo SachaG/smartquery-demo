@@ -115,16 +115,23 @@ if (Meteor.isServer) {
         privateField: _.random(100)
       });
     }
+
+    // make all users "admin" for demo purposes
+    Meteor.users.update({}, {$set: {isAdmin: true}}, {multi: true});
+
   });
 
   SmartQuery.addRule(Posts, {
     filter: function (document) {
-      return document.published === true;
+      var user = Meteor.users.findOne(this.userId);
+      return (user && user.isAdmin) || document.published === true;
     }
   });
 
   SmartQuery.addRule(Comments, {
-    fields: ["_id", "body", "postId"]
+    fields: function () {
+      return ["_id", "body", "postId"];
+    }
   });
 
 }
