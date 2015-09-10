@@ -4,9 +4,17 @@
 
 <body>
   <div class="posts">
+    {{> stats}}
     {{> posts}}
   </div>
 </body>
+
+<template name="stats">
+  <ul class="stats">
+    <li><code>Posts.find().count()</code>: {{postCount}}</li>
+    <li><code>Comments.find().count()</code>: {{commentCount}}</li>
+  </ul>
+</template>
 
 <template name="posts">
   {{#with posts}}
