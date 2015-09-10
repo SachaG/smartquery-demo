@@ -4,8 +4,11 @@
   font-family: 'Source Sans', 'Helvetica', sans-serif;
 }
 .post{
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.comment{
   margin-bottom: 10px;
 }
 h3, p{
@@ -13,6 +16,13 @@ h3, p{
 }
 p{
   font-size:13px;
+  line-height: 1.5;
+}
+h4{
+  background: #eee;
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 .loading{
   position: relative;
@@ -21,7 +31,10 @@ p{
 }
 .load-more{
   text-align:center;
-  background:#eee;
+  background:#4181F4;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
   border: 1px solid #ddd;
   display:block;
   padding: 10px;

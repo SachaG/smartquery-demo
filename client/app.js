@@ -14,9 +14,6 @@ Template.posts.helpers({
     var limit = Template.instance().limit.get();
     var cursor = Posts.find({}, {limit: limit});
     return Smartquery.find("posts", cursor);
-  },
-  isReady: function () {
-    return this.sub.ready();
   }
 });
 
@@ -42,9 +39,6 @@ Template.comments.helpers({
     var limit = Template.instance().limit.get();
     var cursor = Comments.find({postId: this.postId}, {limit: limit});
     return Smartquery.find("comments_for_"+this.postId, cursor);
-  },
-  isReady: function () {
-    return this.sub.ready();
   }
 });
 

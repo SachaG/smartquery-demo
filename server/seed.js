@@ -8,7 +8,7 @@ Meteor.startup(function () {
     var published = !!(i%2);
     Posts.insert({
       title: Fake.sentence(3),
-      body: Fake.paragraph(3),
+      body: Fake.paragraph(5),
       published: published
     });
   }
