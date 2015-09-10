@@ -19,7 +19,7 @@ html, body{
   margin-bottom: 10px;
 }
 .post.not-published{
-  /*background: rgba(255, 219, 224, 1);*/
+  background: rgba(255, 219, 224, 1);
 }
 .comment{
   margin-bottom: 10px;

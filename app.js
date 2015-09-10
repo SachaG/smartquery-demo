@@ -111,13 +111,20 @@ if (Meteor.isServer) {
     for (i = 1; i <= 200; i++) {
       Comments.insert({
         body: Fake.paragraph(3),
-        postId: _.sample(allPosts)._id
+        postId: _.sample(allPosts)._id,
+        privateField: _.random(100)
       });
     }
   });
 
-  // SmartQuery.addRule(function (document) {
-  //   return typeof document.published === "undefined" || document.published === true;
-  // });
+  SmartQuery.addRule(Posts, {
+    filter: function (document) {
+      return document.published === true;
+    }
+  });
+
+  SmartQuery.addRule(Comments, {
+    fields: ["_id", "body", "postId"]
+  });
 
 }
