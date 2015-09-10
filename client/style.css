@@ -10,6 +10,8 @@
 }
 h3, p{
   margin:0px;
+}
+p{
   font-size:13px;
 }
 .loading{

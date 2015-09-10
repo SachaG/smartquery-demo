@@ -18,7 +18,9 @@
       </div>
     {{/each}}
     {{#if isReady}}
-      <a class="load-more load-more-posts" href="#">Load More Posts</a>
+      {{#if hasMore}}
+        <a class="load-more load-more-posts" href="#">Load More Posts</a>
+      {{/if}}
     {{else}}
       <div class="loading">{{>spinner}}</div>
     {{/if}}
@@ -33,7 +35,9 @@
         <li><strong>{{_id}}</strong> {{body}}</li>
       {{/each}}
       {{#if isReady}}
-        <a class="load-more load-more-comments" href="#">Load More Comments</a>
+        {{#if hasMore}}
+          <a class="load-more load-more-comments" href="#">Load More Comments</a>
+        {{/if}}
       {{else}}
         <div class="loading">{{>spinner}}</div>
       {{/if}}

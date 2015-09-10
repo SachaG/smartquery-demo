@@ -54,10 +54,17 @@ if (Meteor.isClient) {
     return {
       sub: sub,
       ready: function () {
-        return sub.ready()
+        return sub.ready();
       },
-      count: cursor.count(),
-      totalCount: Counts.get(id),
+      count: function () {
+        return cursor.count();
+      },
+      totalCount: function () {
+        return Counts.get(id);
+      },
+      hasMore: function () {
+        return this.count() < this.totalCount();
+      },
       cursor: cursor
     };
   }
