@@ -12,7 +12,7 @@
   {{#with posts}}
     <h4>Showing {{count}}/{{totalCount}} posts</h4>
     {{#each cursor}}
-      <div class="post">
+      <div class="post {{postClass}}">
         <h3>{{title}} - {{_id}}</h3>
         <p>{{body}}</p>
         {{> comments postId=_id postTitle=title}}

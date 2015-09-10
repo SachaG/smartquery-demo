@@ -22,3 +22,7 @@ Meteor.startup(function () {
     });
   }
 });
+
+// SmartQuery.addRule(function (document) {
+//   return typeof document.published === "undefined" || document.published === true;
+// });

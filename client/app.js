@@ -1,4 +1,4 @@
-var postsLimit = 1;
+var postsLimit = 2;
 var commentsLimit = 2;
 var commentsLimits = {};
 
@@ -13,7 +13,10 @@ Template.posts.helpers({
   posts: function () {
     var limit = Template.instance().limit.get();
     var cursor = Posts.find({}, {limit: limit});
-    return Smartquery.find("posts", cursor);
+    return SmartQuery.create("posts", cursor);
+  },
+  postClass: function () {
+    return this.published ? "published" : "not-published";
   }
 });
 
@@ -38,7 +41,7 @@ Template.comments.helpers({
   comments: function () {
     var limit = Template.instance().limit.get();
     var cursor = Comments.find({postId: this.postId}, {limit: limit});
-    return Smartquery.find("comments_for_"+this.postId, cursor);
+    return SmartQuery.create("comments_for_"+this.postId, cursor);
   }
 });
 
